@@ -73,8 +73,7 @@ test_coords = None
 print "{:,}".format(len(triangles)), "total triangles."
 print "{:,}".format(len(nodes)), "total nodes."
 
-write_kj(nodes, triangles)
-write_centered_kj(nodes, triangles, limites)
+write_kj(nodes, triangles, limites, name="botadero", center=True, style="jh")
 
 
 tf = time.time()
