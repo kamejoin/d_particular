@@ -4,8 +4,8 @@ import pprint
 from math import *
 from write_functions import *
 
-#inFile  = open('../../dxf/TOPOGRAFIA_VIRGEN.dxf', 'r')
-inFile = open("../../Pascua Lama/botadero nevada.dxf", 'r')
+inFile  = open('../../dxf/TOPOGRAFIA_VIRGEN.dxf', 'r')
+#inFile  = open("../../Pascua Lama/botadero nevada.dxf", 'r')
 #outFile = open('test.kj', 'w')
 
 def sinSpecials(line):
@@ -46,26 +46,25 @@ def check_limit(n):
             if (-2*j + 1) * n[i] < (-2*j + 1) * limites[i][j]:
                 limites[i][j] = n[i]
 
-lines = 0
+
+
 for i,b in enumerate(bloques.keys()):
-    triangles[b - lines] = []
+    triangles[b] = []
+    
     for j in range(3):
         n = {}
         for p,k in enumerate([1,3,5]):
-            # Tolerancia al mm
+            # Tolerancia al cm
             # ind = 15 -> 10
-            #n[p] = round(float(bloques[b][15 + k + j*6].strip()),4)
-            n[p] = float(bloques[b][15 + k + j*6].strip())
+            n[p] = round(float(bloques[b][15 + k + j*6].strip()),2)
         try:
-            triangles[b - lines] += [test_coords[(n[0], n[1], n[2])]]
+            triangles[b] += [test_coords[(n[0], n[1], n[2])]]
         except:
             test_coords[(n[0], n[1], n[2])] = len(nodes)
-            triangles[b - lines] += [len(nodes)]
+            triangles[b] += [len(nodes)]
             nodes[len(nodes)] = n
             check_limit(n)
-    triangles[b - lines] = sorted([n for n in triangles[b - lines] if triangles[b - lines].count(n) == 1])
-    if len(triangles[b - lines]) < 3:
-        lines += 1
+    triangles[b] = sorted(triangles[b])
 
 inFile.close()
 test_coords = None
@@ -73,7 +72,9 @@ test_coords = None
 print "{:,}".format(len(triangles)), "total triangles."
 print "{:,}".format(len(nodes)), "total nodes."
 
-write_kj(nodes, triangles, limites, name="botadero", center=True, style="jh")
+filename = "derk"
+write_kj(nodes, triangles, filename)
+write_centered_kj(nodes, triangles, limites, filename)
 
 
 tf = time.time()
