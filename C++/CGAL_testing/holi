@@ -1,0 +1,13 @@
+g++ -Wall -I"C:\Libs\CGAL-4.10\include"  -I"C:\Libs\boost_1_64_0" -L"C:\Libs\CGAL-4.10\build\lib" -L"C:\Libs\boost_1_64_0\lib64-msvc-14.0"  test.cpp -o main -lboost_system-vc140-mt-1_64 -lCGAL-vc140-mt-4.10 -lCGAL_Core-vc140-mt-4.10
+test.cpp: In function 'int main(int, char**)':
+test.cpp:34:10: warning: variable 'help' set but not used [-Wunused-but-set-variable]
+     bool help = false;
+          ^~~~
+C:\Users\JORGE~1.MAR\AppData\Local\Temp\ccTZhmiv.o:test.cpp:(.text$_ZN4CGAL10Properties17Property_map_baseINS_15SM_Vertex_indexENS_7Point_3INS_16Simple_cartesianIdEEEENS_12Surface_meshIS6_E12Property_mapIS2_S6_EEEixERKS2_[_ZN4CGAL10Properties17Property_map_baseINS_15SM_Vertex_indexENS_7Point_3INS_16Simple_cartesianIdEEEENS_12Surface_meshIS6_E12Property_mapIS2_S6_EEEixERKS2_]+0x49): undefined reference to `__imp__ZN4CGAL14assertion_failEPKcS1_iS1_'
+C:\Users\JORGE~1.MAR\AppData\Local\Temp\ccTZhmiv.o:test.cpp:(.text$_ZN4CGAL11Interval_ntILb0EE27Test_runtime_rounding_modesC1Ev[_ZN4CGAL11Interval_ntILb0EE27Test_runtime_rounding_modesC1Ev]+0xe3): undefined reference to `__imp__ZN4CGAL14assertion_failEPKcS1_iS1_'
+C:\Users\JORGE~1.MAR\AppData\Local\Temp\ccTZhmiv.o:test.cpp:(.text$_ZN4CGAL11Interval_ntILb0EE27Test_runtime_rounding_modesC1Ev[_ZN4CGAL11Interval_ntILb0EE27Test_runtime_rounding_modesC1Ev]+0x1aa): undefined reference to `__imp__ZN4CGAL14assertion_failEPKcS1_iS1_'
+C:\Users\JORGE~1.MAR\AppData\Local\Temp\ccTZhmiv.o:test.cpp:(.text$_ZN4CGAL11Interval_ntILb1EE27Test_runtime_rounding_modesC1Ev[_ZN4CGAL11Interval_ntILb1EE27Test_runtime_rounding_modesC1Ev]+0xe3): undefined reference to `__imp__ZN4CGAL14assertion_failEPKcS1_iS1_'
+C:\Users\JORGE~1.MAR\AppData\Local\Temp\ccTZhmiv.o:test.cpp:(.text$_ZN4CGAL11Interval_ntILb1EE27Test_runtime_rounding_modesC1Ev[_ZN4CGAL11Interval_ntILb1EE27Test_runtime_rounding_modesC1Ev]+0x1aa): undefined reference to `__imp__ZN4CGAL14assertion_failEPKcS1_iS1_'
+C:\Users\JORGE~1.MAR\AppData\Local\Temp\ccTZhmiv.o:test.cpp:(.text$_ZN4CGAL10Properties17Property_map_baseINS_15SM_Vertex_indexENS_12Surface_meshINS_7Point_3INS_16Simple_cartesianIdEEEEE19Vertex_connectivityENS8_12Property_mapIS2_S9_EEEixERKS2_[_ZN4CGAL10Properties17Property_map_baseINS_15SM_Vertex_indexENS_12Surface_meshINS_7Point_3INS_16Simple_cartesianIdEEEEE19Vertex_connectivityENS8_12Property_mapIS2_S9_EEEixERKS2_]+0x49): more undefined references to `__imp__ZN4CGAL14assertion_failEPKcS1_iS1_' follow
+collect2.exe: error: ld returned 1 exit status
+mingw32-make: *** [makefile:21: main] Error 1
