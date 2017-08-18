@@ -1,0 +1,94 @@
+Ya... Luego de muchos DIAS intentando instalar CGAL en windows (sin vs puaj), llegué a la conclusión
+de que lo mejor es volver al ol' simple linux, es decir, Linux distro en Windows. Ojo que intenté con 
+Cygwin, Mingw, Mingw64, VS, binarios de mingw, binarios de VS, todo todo TODO.
+
+----------------------------------------------------------
+
+Afortunadamente, Windows 10 nos soluciona cualquier problema de partición al poder crear un subsistema
+Ubuntu dentro de Windows. Para instalar el subsistema Ubuntu se deben seguir las siguientes instrucciones:
+	
+	https://msdn.microsoft.com/en-us/commandline/wsl/install_guide
+
+O simplemente abrir un PowerShell e ingresar:
+
+	Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+
+Una vez que esté Ubuntu instalado es cosa de abrir un cmd e ingresar "bash" para estar dentro del subsistema.
+
+----------------------------------------------------------
+
+Una vez dentro de ubuntu instalamos boost:
+
+	sudo apt-get install libboost-all-dev (ASI DE SIMPLE)
+
+----------------------------------------------------------
+
+Para instalar CGAL no nos debemos tentar con 
+
+	sudo apt-get install libcgal-dev
+
+ya que la versión de CGAL built-in es menor a la actual y hay problemas de compatibilidad. Por lo tanto, 
+debemos descargar desde el siguiente link:
+
+	https://github.com/CGAL/cgal/releases
+
+el siguiente archivo:
+
+	CGAL-4.10.tar.xz (o la última versión varificada)
+
+Para descomprimir el archivo, hacemos
+
+	tar -xf CGAL-4.10.tar.xz
+
+Se descomprimirá en la carpeta donde esté el .tar, en otra carpeta con el mismo nombre del archivo.
+
+----------------------------------------------------------
+
+Dentro de esta carpeta hacemos:
+
+	cmake .
+
+Siempre fallará algo, GMP o MPFR por ejemplo. Para instalar ambos hacer:
+
+	sudo apt-get install libgmp3-dev
+	sudo apt-get install libmpfr-dev libmpfr-doc libmpfr4 libmpfr4-dbg
+
+Volvemos a hacer
+
+	cmake .
+
+hasta que se genere el make. Luego hacemos:
+
+	make
+
+Y deberiamos tener las librerias compiladas. 
+
+----------------------------------------------------------
+
+En linux, no es necesario crear variables del sistema, sino que simplemente se copian y pegan las libs y
+las includes dentro de 
+
+	/usr/lib/
+	/usr/include/
+
+respectivamente. Así, si dentro de la carpeta de CGAL hacemos:
+
+	sudo cp -a ./lib/. /usr/lib/
+	sudo cp -a ./include/. /usr/include/
+
+tendremos las libs y los includes en el sistema.
+
+----------------------------------------------------------
+
+Dado que los includes y las libs de CGAL pasan a ser parte del sistema, no es necesario hacer Makefiles 
+que contengan los paths absolutos. Solamente será necesario agregar las libs al final del llamado al 
+compilador:
+
+	g++ example.cpp -lCGAL -lCGAL_Core
+
+----------------------------------------------------------
+
+Enjoy :D!
+
+
+	
